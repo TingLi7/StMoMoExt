@@ -32,7 +32,20 @@
 #' @export
 #'
 #' @examples
+#' # create survival function for an individual aged 55
+#' AUS_male_rates <- mortality_AUS_data$rate$male
+#' ages <- mortality_AUS_data$age # 0:110
+#' old_ages <- 91:130
+#' fitted_ages <- 76:90
 #'
+#' completed_rates <- complete_old_age(
+#' AUS_male_rates, ages, old_ages, method = "kannisto", type = "central", fitted_ages = fitted_ages)
+#'
+#' all_ages <- 0:130
+#' surv_func <- rate2survival(completed_rates, ages = all_ages, from = 'central', init_age = 55)
+#'
+#' # convert from P to Q measure survival function
+#' surv_func_Q <- survivalP2Q(surv_func, method = "wang", lambda = 1.5)
 survivalP2Q <- function(StP, method, lambda) {
 
   # Flagging Errors ---------------------------------------------------------
