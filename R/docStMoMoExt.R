@@ -1,3 +1,16 @@
+#' StMoMoExt.
+#'
+#' @name StMoMoExt
+#' @docType package
+#' @importFrom dplyr near
+#' @importFrom fanplot fan
+#' @importFrom graphics lines
+#' @importFrom grDevices colorRampPalette rgb
+#' @importFrom stats approxfun uniroot quantile pnorm
+#' @importFrom utils head tail
+NULL
+
+
 #' Australian mortality data
 #'
 #' Mortality rates of Australians from the Human Mortality Database.
