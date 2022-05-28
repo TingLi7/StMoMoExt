@@ -44,6 +44,7 @@ Implements the Kannisto method of age completion for old ages.
 AUS_male_rates <- mortality_AUS_data$rate$male
 ages <- mortality_AUS_data$age # 0:110
 old_ages <- 91:130
+
 # fit model on tail end of ages where mortality is still accurate
 fitted_ages <- 76:90
 completed_rates <- kannisto(

@@ -22,9 +22,11 @@ AUS_male_rates <- mortality_AUS_data$rate$male
 ages <- mortality_AUS_data$age # 0:110
 old_ages <- 91:130
 fitted_ages <- 76:90
+
 completed_rates <- complete_old_age(
 AUS_male_rates, ages, old_ages, method = "kannisto", type = "central",
 fitted_ages = fitted_ages)
+
 # suppose these are rates for cohort starting at age 60
 cohort_rates_60 <- completed_rates[as.character(60:130), ]
 period_rates <- cohort2period(cohort_rates_60)

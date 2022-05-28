@@ -19,6 +19,7 @@
 #' AUS_male_rates <- mortality_AUS_data$rate$male
 #' ages <- mortality_AUS_data$age # 0:110
 #' old_ages <- 91:130
+#'
 #' completed_rates <- coale_kisker(AUS_male_rates, ages, old_ages, type = "central")
 coale_kisker <- function(rates, ages, old_ages, type = "central", closure_age = 130, m_end = 1, years = NULL) {
 
@@ -195,9 +196,12 @@ coale_kisker <- function(rates, ages, old_ages, type = "central", closure_age = 
 #' AUS_male_rates <- mortality_AUS_data$rate$male
 #' ages <- mortality_AUS_data$age # 0:110
 #' old_ages <- 91:130
+#'
 #' # first convert to death probabilities
 #' AUS_male_qx <- rate2rate(AUS_male_rates, from = "central", to = "prob")
+#'
 #' completed_qx <- denuit_goderniaux(AUS_male_qx, ages, old_ages, type = "prob")
+#'
 #' # fit on ages 80:110 instead
 #' completed_qx_from_80 <- denuit_goderniaux(
 #' AUS_male_qx, ages, old_ages, type = "prob", start_fit_age = 80)
@@ -395,6 +399,7 @@ denuit_goderniaux <- function(rates, ages, old_ages, type = "prob", closure_age 
 #' AUS_male_rates <- mortality_AUS_data$rate$male
 #' ages <- mortality_AUS_data$age # 0:110
 #' old_ages <- 91:130
+#'
 #' # fit model on tail end of ages where mortality is still accurate
 #' fitted_ages <- 76:90
 #' completed_rates <- kannisto(
@@ -612,13 +617,17 @@ kannisto <- function(rates, ages, old_ages, fitted_ages, type = "force", closure
 #' AUS_male_rates <- mortality_AUS_data$rate$male
 #' ages <- mortality_AUS_data$age # 0:110
 #' old_ages <- 91:130
+#'
 #' # first convert mortality rates to death probabilties
 #' AUS_male_qx <- rate2rate(AUS_male_rates, from = "central", to = "prob")
+#'
 #' # completing mortality rates for old ages
 #' DG_q <- complete_old_age(
 #' AUS_male_qx, ages, old_ages, method = "DG", type = "prob")
+#'
 #' CK_q <- complete_old_age(
 #' AUS_male_qx, ages, old_ages, method = "CK", type = "prob")
+#'
 #' kannisto_q <- complete_old_age(
 #' AUS_male_qx, ages, old_ages, method = "kannisto", type = "prob", fitted_ages = 80:90)
 complete_old_age <- function(rates, ages, old_ages, method = "kannisto",
