@@ -47,5 +47,16 @@ completed mortality rates for all ages and old ages in the same format as
 Completes mortality rates at old ages.
 }
 \examples{
-
+AUS_male_rates <- mortality_AUS_data$rate$male
+ages <- mortality_AUS_data$age # 0:110
+old_ages <- 91:130
+# first convert mortality rates to death probabilties
+AUS_male_qx <- rate2rate(AUS_male_rates, from = "central", to = "prob")
+# completing mortality rates for old ages
+DG_q <- complete_old_age(
+AUS_male_qx, ages, old_ages, method = "DG", type = "prob")
+CK_q <- complete_old_age(
+AUS_male_qx, ages, old_ages, method = "CK", type = "prob")
+kannisto_q <- complete_old_age(
+AUS_male_qx, ages, old_ages, method = "kannisto", type = "prob", fitted_ages = 80:90)
 }
