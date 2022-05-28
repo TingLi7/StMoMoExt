@@ -156,7 +156,36 @@ plot_exp_cfl <- function(exp_cfl_rates, years, level = 95) {
 #' @export
 #'
 #' @examples
+#' # generate simulated rates with 'StMoMo'
+#' # install and load 'StMoMo' if the package is not loaded
+#' \dontrun{
+#' # fitting lee carter model on ages 55:89
+#' AUS_StMoMo <- StMoMoData(mortality_AUS_data, series = "male")
+#' LC <- lc(link = "logit") # lee carter model
+#' AUS_Male_Ini_Data <- central2initial(AUS_StMoMo)
+#' ages_fit <- 55:89
+#' wxy <- genWeightMat(ages = ages_fit, years = AUS_Male_Ini_Data$years, clip = 3)
+#' LC_fit <- fit(LC, data = AUS_Male_Ini_Data, ages.fit = ages_fit, wxt = wxy)
 #'
+#' # simulating rates for next 100 years
+#' set.seed(1234)
+#' n_sim <- 10
+#' LC_sim <- simulate(LC_fit, nsim = n_sim, h = 100)
+#'
+#' # using kannisto method to complete rates
+#' young_ages <- LC_sim$ages # 55:89
+#' old_ages <- 90:130
+#' ages <- c(young_ages, old_ages)
+#'
+#' kannisto_sim <- complete_old_age(rates = LC_sim$rates, ages = young_ages,
+#'                                  old_ages = old_ages, fitted_ages = 80:89,
+#'                                  method = "kannisto", type = "central")
+#'
+#' # create period survival function for individual aged 55
+#' surv_sim <- rate2survival(kannisto_sim, ages, from = "central")
+#'
+#' plot_surv_sim(surv_sim, 55, 2050)
+#' }
 plot_surv_sim <- function(surv_sim, init_age, target_year, level = 95, years = NULL) {
 
   # Flagging Errors ---------------------------------------------------------
