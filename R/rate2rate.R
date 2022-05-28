@@ -25,7 +25,9 @@
 #' @export
 #'
 #' @examples
-#'
+#' # change from central death rates to 1-year death probabilities
+#' central_rates <- mortality_AUS_data$rate$male
+#' death_prob <- rate2rate(central_rates, from = "central", to = "prob")
 rate2rate <- function(rates, from, to) {
 
   # Flagging errors ---------------------------------------------------------

@@ -31,5 +31,7 @@ resulting in the following conversions:
 \deqn{m_{x, y}  = -log(1 - q_{x, y})}
 }
 \examples{
-
+# change from central death rates to 1-year death probabilities
+central_rates <- mortality_AUS_data$rate$male
+death_prob <- rate2rate(central_rates, from = "central", to = "prob")
 }
