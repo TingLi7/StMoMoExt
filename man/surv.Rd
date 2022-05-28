@@ -23,3 +23,25 @@ Distribution and quantile function  of the survival function.
 \details{
 Linear interpolation is performed between the discrete points of the survival function
 }
+\examples{
+# create survival function for an individual aged 55
+AUS_male_rates <- mortality_AUS_data$rate$male
+ages <- mortality_AUS_data$age # 0:110
+old_ages <- 91:130
+fitted_ages <- 76:90
+
+completed_rates <- complete_old_age(
+AUS_male_rates, ages, old_ages, method = "kannisto", type = "central", fitted_ages = fitted_ages)
+
+all_ages <- 0:130
+surv_func <- rate2survival(completed_rates, ages = all_ages, from = 'central', init_age = 55)
+
+# take vector of survival function (consider year 2017)
+surv_func_2017 <- surv_func[, "2017"]
+
+# calculate probability of surviving 10 and 20 years
+psurv(surv_func_2017, c(10, 20))
+
+# calculating the 80\% and 95\% quantile survival time
+qsurv(surv_func_2017, c(0.8, 0.95))
+}
