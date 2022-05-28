@@ -17,8 +17,9 @@ calendar year or cohort (on the columns) and simulation number (3rd dimension)}
 3D array of combined historical and simulated rates
 }
 \description{
-Combine Historical and Simulated Rates
+Combines a matrix of historical and 3D array of simulated rates.
 }
-\examples{
-
+\details{
+Connects the cohort/years of historical and simulated years together.
+See \code{\link{plot_exp_cfl}} for usage
 }

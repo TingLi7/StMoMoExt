@@ -24,7 +24,22 @@
 #' @export
 #'
 #' @examples
+#' # complete rates using kannisto method
+#' AUS_male_rates <- mortality_AUS_data$rate$male
+#' ages <- mortality_AUS_data$age # 0:110
+#' old_ages <- 91:130
+#' fitted_ages <- 76:90
 #'
+#' completed_rates <- complete_old_age(
+#' AUS_male_rates, ages, old_ages, method = "kannisto", type = "central", fitted_ages = fitted_ages)
+#'
+#' # convert to qx
+#' completed_qx <- rate2rate(completed_rates, from = "central", to = "prob")
+#' all_ages <- 0:130
+#'
+#' # expected curtate future lifetime using period rates for individual aged 0 and 60
+#' ecfl_0 <- exp_cfl(completed_qx, all_ages)
+#' ecfl_60 <- exp_cfl(completed_qx, all_ages, init_age = 60)
 exp_cfl <- function(qx, ages, init_age = NULL, years = NULL) {
 
   # Flagging Errors ---------------------------------------------------------

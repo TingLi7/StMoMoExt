@@ -1,5 +1,10 @@
 #' Combine Historical and Simulated Rates
 #'
+#' Combines a matrix of historical and 3D array of simulated rates.
+#'
+#' Connects the cohort/years of historical and simulated years together.
+#' See \code{\link{plot_exp_cfl}} for usage
+#'
 #' @param rates_hist
 #' Matrix of historical mortality rates with age (on the rows) and
 #' calendar year or cohort (on the columns)
@@ -10,8 +15,6 @@
 #' @return
 #' 3D array of combined historical and simulated rates
 #' @export
-#'
-#' @examples
 #'
 combine_hist_sim <- function(rates_hist, rates_sim) {
 

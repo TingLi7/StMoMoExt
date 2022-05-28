@@ -19,5 +19,53 @@ Should be generated from \code{\link{exp_cfl}}}
 Plots simulated expected curtate future lifetime.
 }
 \examples{
+# generate simulated rates with 'StMoMo'
+# install and load 'StMoMo' if the package is not loaded
 
+\dontrun{
+# fitting lee carter model on ages 55:89
+AUS_StMoMo <- StMoMoData(mortality_AUS_data, series = "male")
+LC <- lc(link = "logit") # lee carter model
+AUS_Male_Ini_Data <- central2initial(AUS_StMoMo)
+ages_fit <- 55:89
+wxy <- genWeightMat(ages = ages_fit, years = AUS_Male_Ini_Data$years, clip = 3)
+LC_fit <- fit(LC, data = AUS_Male_Ini_Data, ages.fit = ages_fit, wxt = wxy)
+
+# simulating rates for next 100 years
+set.seed(1234)
+n_sim <- 10
+LC_sim <- simulate(LC_fit, nsim = n_sim, h = 100)
+
+# using kannisto method to complete rates
+young_ages <- LC_sim$ages # 55:89
+old_ages <- 90:130
+ages <- c(young_ages, old_ages)
+
+# extracting necessary info from historical data and simulations
+rates_hist <- mortality_AUS_data$rate$male[as.character(young_ages), ]
+years_hist <- as.numeric(colnames(rates_hist))
+years_sim <- LC_sim$years
+years <- c(years_hist, years_sim)
+
+kannisto_sim <- complete_old_age(
+rates = LC_sim$rates, ages = young_ages, old_ages = old_ages,
+fitted_ages = 80:89, method = "kannisto", type = "central")
+kannisto_hist <- complete_old_age(
+rates = rates_hist, ages = young_ages, old_ages = old_ages,
+fitted_ages = 80:89, method = "kannisto", type = "central")
+
+################# USAGE BEGINS HERE ################
+
+# combining historical and simulations
+kannisto_55_period <- combine_hist_sim(rates_hist = kannisto_hist, rates_sim = kannisto_sim)
+
+# working with cohort starting from age 55
+kannisto_55 <- period2cohort(period_rates = kannisto_55_period, ages = ages)
+kannisto_55_q <- rate2rate(kannisto_55, from = "central", to = "prob")
+
+exp_cfl_kannisto <- exp_cfl(qx = kannisto_55_q, ages = ages)
+# Expected curtate future lifetime can only be computed for earlier (complete) cohorts
+exp_cfl_kannisto_clean <- exp_cfl_kannisto[, as.character(1970:2043)]
+plot_exp_cfl(exp_cfl_rates = exp_cfl_kannisto_clean, years = 1970:2043)
+}
 }
