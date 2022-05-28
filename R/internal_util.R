@@ -10,9 +10,6 @@
 #'
 #' @return
 #' 3D array of matrices obtained by applying a function
-#'
-#' @examples
-#'
 arr_apply <- function(X, FUN) {
 
   X_list <- lapply(seq(dim(X)[3]), function(i) matrix(X[, , i], nrow = dim(X)[1], ncol = dim(X)[2]))
