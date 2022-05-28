@@ -33,5 +33,17 @@ Converts mortality rates to the associated survival function.
 The survival function has survival time (starting from 0) on the rows.
 }
 \examples{
+# consider the Kannisto completion method on male mortality rates
+AUS_male_rates <- mortality_AUS_data$rate$male
+ages <- mortality_AUS_data$age # 0:110
+old_ages <- 91:130
+fitted_ages <- 76:90
 
+completed_rates <- complete_old_age(
+AUS_male_rates, ages, old_ages, method = "kannisto", type = "central",
+fitted_ages = fitted_ages)
+
+# compute survival function of an individual aged 55
+all_ages <- 0:130
+surv_func <- rate2survival(completed_rates, ages = all_ages, from = 'central', init_age = 55)
 }

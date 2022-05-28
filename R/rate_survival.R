@@ -27,7 +27,19 @@
 #' @export
 #'
 #' @examples
+#' # consider the Kannisto completion method on male mortality rates
+#' AUS_male_rates <- mortality_AUS_data$rate$male
+#' ages <- mortality_AUS_data$age # 0:110
+#' old_ages <- 91:130
+#' fitted_ages <- 76:90
 #'
+#' completed_rates <- complete_old_age(
+#' AUS_male_rates, ages, old_ages, method = "kannisto", type = "central",
+#' fitted_ages = fitted_ages)
+#'
+#' # compute survival function of an individual aged 55
+#' all_ages <- 0:130
+#' surv_func <- rate2survival(completed_rates, ages = all_ages, from = 'central', init_age = 55)
 rate2survival <- function(rates, ages, from = "prob", init_age = NULL, years = NULL) {
 
   # Flagging errors ---------------------------------------------------------
@@ -152,7 +164,27 @@ rate2survival <- function(rates, ages, from = "prob", init_age = NULL, years = N
 #' @export
 #'
 #' @examples
+#' # create survival function for an individual aged 55
+#' AUS_male_rates <- mortality_AUS_data$rate$male
+#' ages <- mortality_AUS_data$age # 0:110
+#' old_ages <- 91:130
+#' fitted_ages <- 76:90
 #'
+#' completed_rates <- complete_old_age(
+#' AUS_male_rates, ages, old_ages, method = "kannisto", type = "central", fitted_ages = fitted_ages)
+#'
+#' all_ages <- 0:130
+#' surv_func <- rate2survival(completed_rates, ages = all_ages, from = 'central', init_age = 55)
+#'
+#' # note that we typically transfer from survival function to rate after
+#' # converting a survival function from real world measure to risk-free measure
+#'
+#' # convert from P to Q measure survival function
+#' # see the section on risk neutral probability
+#' surv_func_Q <- survivalP2Q(surv_func, method = "wang", lambda = 1.5)
+#'
+#' # convert from survival function to mortality rates
+#' central_rates_Q <- survival2rate(surv_func_Q, 55:130, to = 'central')
 survival2rate <- function(surv, ages, to = "prob", years = NULL) {
 
   # Flagging Errors ---------------------------------------------------------
