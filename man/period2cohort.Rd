@@ -23,5 +23,8 @@ or as a matrix otherwise
 Converts from period to cohort mortality rates
 }
 \examples{
-
+period_rates <- mortality_AUS_data$rate$male
+ages <- mortality_AUS_data$age # 0:110
+# convert to rates for cohort aged 55
+cohort_rates_55 <- period2cohort(period_rates, ages, init_age = 55)
 }
