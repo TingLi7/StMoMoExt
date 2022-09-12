@@ -88,7 +88,7 @@ sim_indiv_path <- function(init_age, sex = "F", death_probs = NULL, closure_age 
   for (i in 2:ncol(sim_path)) {
     # Simulate TRUE/FALSE vector indicating if individual has died
     # during this transition
-    sim_death <- (runif(n_sim) <= death_probs[i - 1])
+    sim_death <- (stats::runif(n_sim) <= death_probs[i - 1])
     # Encoding to 0 for alive and -1 for dead
     sim_path[, i] <- -as.numeric(sim_death)
     # transitions cannot occur for dead individuals
@@ -199,7 +199,7 @@ sim_cohort_path_realised <- function(init_age, sex = "F", death_probs = NULL,
       still_alive <- sim_path[i, j - 1]
       if (still_alive) {
         # simulate with 1-year survival probability
-        sim_path[i, j] <- round(rbinom(1, still_alive, 1 - death_probs[j - 1]))
+        sim_path[i, j] <- round(stats::rbinom(1, still_alive, 1 - death_probs[j - 1]))
       } else {
         sim_path[i, j] <- 0
       }

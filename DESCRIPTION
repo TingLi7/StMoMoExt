@@ -1,17 +1,20 @@
 Package: StMoMoExt
 Type: Package
-Title: What the Package Does (Title Case)
+Title: StMoMo Extension
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Ting Li <tiantingli7@gmail.com>,
+    Andres Villegas <andresmauriciovillegas@gmail.com>
+Maintainer: Ting Li <tiantingli7@gmail.com>
+Description: An extension of the 'StMoMo' R package to produce mortality rates 
+    at older ages and risk-free survival probabilities. It also includes 
+    functions to simulate life paths and output summary statistics.
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.1
 Imports:
     fanplot,
-    dplyr
+    dplyr,
+    StMoMo
 Depends: 
-    R (>= 2.10), StMoMo
+    R (>= 2.10)
