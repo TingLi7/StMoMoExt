@@ -4,6 +4,7 @@
 #' @docType package
 #' @importFrom dplyr near
 #' @importFrom fanplot fan
+#' @importFrom forecast forecast
 #' @importFrom graphics lines
 #' @importFrom grDevices colorRampPalette rgb
 #' @importFrom stats approxfun uniroot quantile pnorm

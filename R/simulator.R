@@ -19,7 +19,6 @@
 #' @return
 #' a matrix where each row represents an individual's dead (-1) or alive (0) status
 #' at each age
-#'
 #' @export
 #'
 sim_indiv_path <- function(init_age, sex = "F", death_probs = NULL, closure_age = 130, n_sim = 10000, seed = NULL) {

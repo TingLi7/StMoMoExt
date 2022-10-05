@@ -77,7 +77,7 @@ generate_default_qx <- function(init_age, sex = "F", closure_age = 130) {
   ages_fit <- young_ages
   wxy <- StMoMo::genWeightMat(ages = ages_fit, years = AUS_Ini_Data$years, clip = 3)
   M7_fit <- StMoMo::fit(M7, data = AUS_Ini_Data, ages.fit = ages_fit, wxt = wxy)
-  M7_for <- StMoMo::forecast(M7_fit, h = 100)
+  M7_for <- forecast::forecast(M7_fit, h = 100)
 
   # Mortality Rate Completion with Kannisto Method
   old_ages <- 90:closure_age
