@@ -45,10 +45,10 @@
 #'
 #' kannisto_sim <- complete_old_age(
 #' rates = LC_sim$rates, ages = young_ages, old_ages = old_ages,
-#' fitted_ages = 80:89, method = "kannisto", type = "central")
+#' control = list(fitted_ages = 80:89), method = "kannisto", type = "central")
 #' kannisto_hist <- complete_old_age(
 #' rates = rates_hist, ages = young_ages, old_ages = old_ages,
-#' fitted_ages = 80:89, method = "kannisto", type = "central")
+#' control = list(fitted_ages = 80:89), method = "kannisto", type = "central")
 #'
 #' ################# USAGE BEGINS HERE ################
 #'
@@ -178,7 +178,7 @@ plot_exp_cfl <- function(exp_cfl_rates, years, level = 95) {
 #' ages <- c(young_ages, old_ages)
 #'
 #' kannisto_sim <- complete_old_age(rates = LC_sim$rates, ages = young_ages,
-#'                                  old_ages = old_ages, fitted_ages = 80:89,
+#'                                  old_ages = old_ages, control = list(fitted_ages = 80:89),
 #'                                  method = "kannisto", type = "central")
 #'
 #' # create period survival function for individual aged 55

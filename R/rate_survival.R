@@ -35,7 +35,7 @@
 #'
 #' completed_rates <- complete_old_age(
 #' AUS_male_rates, ages, old_ages, method = "kannisto", type = "central",
-#' fitted_ages = fitted_ages)
+#' control = list(fitted_ages = fitted_ages))
 #'
 #' # compute survival function of an individual aged 55
 #' all_ages <- 0:130
@@ -171,7 +171,8 @@ rate2survival <- function(rates, ages, from = "prob", init_age = NULL, years = N
 #' fitted_ages <- 76:90
 #'
 #' completed_rates <- complete_old_age(
-#' AUS_male_rates, ages, old_ages, method = "kannisto", type = "central", fitted_ages = fitted_ages)
+#' AUS_male_rates, ages, old_ages, method = "kannisto", type = "central",
+#' control = list(fitted_ages = fitted_ages))
 #'
 #' all_ages <- 0:130
 #' surv_func <- rate2survival(completed_rates, ages = all_ages, from = 'central', init_age = 55)

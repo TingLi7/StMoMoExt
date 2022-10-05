@@ -49,10 +49,10 @@ years <- c(years_hist, years_sim)
 
 kannisto_sim <- complete_old_age(
 rates = LC_sim$rates, ages = young_ages, old_ages = old_ages,
-fitted_ages = 80:89, method = "kannisto", type = "central")
+control = list(fitted_ages = 80:89), method = "kannisto", type = "central")
 kannisto_hist <- complete_old_age(
 rates = rates_hist, ages = young_ages, old_ages = old_ages,
-fitted_ages = 80:89, method = "kannisto", type = "central")
+control = list(fitted_ages = 80:89), method = "kannisto", type = "central")
 
 ################# USAGE BEGINS HERE ################
 

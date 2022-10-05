@@ -83,11 +83,11 @@ generate_default_qx <- function(init_age, sex = "F", closure_age = 130) {
   old_ages <- 90:closure_age
   ages <- c(young_ages, old_ages)
   kannisto_hist <- complete_old_age(rates = rates_hist, ages = young_ages,
-                                    old_ages = old_ages, fitted_ages = 80:89,
+                                    old_ages = old_ages, control = list(fitted_ages = 80:89),
                                     closure_age = closure_age,
                                     method = "kannisto", type = "central")
   kannisto_for <- complete_old_age(rates = M7_for$rates, ages = young_ages,
-                                   old_ages = old_ages, fitted_ages = 80:89,
+                                   old_ages = old_ages, control = list(fitted_ages = 80:89),
                                    closure_age = closure_age,
                                    method = "kannisto", type = "central")
 

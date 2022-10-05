@@ -41,7 +41,7 @@ fitted_ages <- 76:90
 
 completed_rates <- complete_old_age(
 AUS_male_rates, ages, old_ages, method = "kannisto", type = "central",
-fitted_ages = fitted_ages)
+control = list(fitted_ages = fitted_ages))
 
 # compute survival function of an individual aged 55
 all_ages <- 0:130

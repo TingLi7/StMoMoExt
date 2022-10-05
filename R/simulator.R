@@ -30,7 +30,7 @@
 #' old_ages <- 91:130
 #' AUS_male_qx <- rate2rate(AUS_male_rates, from = "central", to = "prob")
 #' kannisto_q <- complete_old_age(AUS_male_qx, ages, old_ages, method = "kannisto",
-#'                                type = "prob", fitted_ages = 80:90)
+#'                                type = "prob", control = list(fitted_ages = 80:90))
 #' # Consider males aged 55 in the year 2018
 #' qx_55_2018 <- kannisto_q[as.character(55:130), "2018"]
 #' sim_indiv_path(init_age = 55, sex = "M", death_probs = qx_55_2018)
@@ -147,7 +147,7 @@ sim_indiv_path <- function(init_age, sex = "F", death_probs = NULL, closure_age 
 #' old_ages <- 91:130
 #' AUS_male_qx <- rate2rate(AUS_male_rates, from = "central", to = "prob")
 #' kannisto_q <- complete_old_age(AUS_male_qx, ages, old_ages, method = "kannisto",
-#'                                type = "prob", fitted_ages = 80:90)
+#'                                type = "prob", control = list(fitted_ages = 80:90))
 #' # Consider 100 males aged 55 in the year 2018
 #' qx_55_2018 <- kannisto_q[as.character(55:130), "2018"]
 #' sim_cohort_path_realised(init_age = 55, sex = "M",
@@ -267,7 +267,7 @@ sim_cohort_path_realised <- function(init_age, sex = "F", death_probs = NULL,
 #' old_ages <- 91:130
 #' AUS_male_qx <- rate2rate(AUS_male_rates, from = "central", to = "prob")
 #' kannisto_q <- complete_old_age(AUS_male_qx, ages, old_ages, method = "kannisto",
-#'                                type = "prob", fitted_ages = 80:90)
+#'                                type = "prob", control = list(fitted_ages = 80:90))
 #' # Consider 100 males aged 55 in the year 2018
 #' qx_55_2018 <- kannisto_q[as.character(55:130), "2018"]
 #' sim_cohort_path_expected(init_age = 55, sex = "M",

@@ -31,7 +31,8 @@
 #' fitted_ages <- 76:90
 #'
 #' completed_rates <- complete_old_age(
-#' AUS_male_rates, ages, old_ages, method = "kannisto", type = "central", fitted_ages = fitted_ages)
+#' AUS_male_rates, ages, old_ages, method = "kannisto", type = "central",
+#' control = list(fitted_ages = fitted_ages))
 #'
 #' # convert to qx
 #' completed_qx <- rate2rate(completed_rates, from = "central", to = "prob")

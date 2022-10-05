@@ -12,7 +12,7 @@ complete_old_age(
   type = "prob",
   closure_age = 130,
   years = NULL,
-  ...
+  control = list(m_end = 1, start_fit_age = 75, smoothing = FALSE, fitted_ages = NULL)
 )
 }
 \arguments{
@@ -36,8 +36,8 @@ Takes the following values: "central" for central death rates,
 \item{years}{optional vector of years for `rates`. If not supplied, then the column names
 of `rates` will be preserved}
 
-\item{...}{additional arguments for the chosen completion method. See
-\code{\link{coale_kisker}}, \code{\link{denuit_goderniaux}}, \code{\link{kannisto}}}
+\item{control}{a \code{list} of additional control parameters for the chosen completion method.
+See 'Details'.}
 }
 \value{
 completed mortality rates for all ages and old ages in the same format as
@@ -46,12 +46,36 @@ completed mortality rates for all ages and old ages in the same format as
 \description{
 Completes mortality rates at old ages.
 }
+\details{
+The 'control' argument is a list that supplies the required additional parameters
+for the chosen completion method.
+
+Coale and Kisker method:
+\itemize{
+  \item{\code{m_end} - constant or vector specifying the central death rates at the final age for
+each calendar year. If supplied as a vector, vector length and number of
+columns for `rates` must be equal}
+}
+
+Denuit and Goderniaux method:
+\itemize{
+  \item{\code{start_fit_age} - model is fitted to ages starting from this age}
+  \item{\code{smoothing} - logical value indicating if smoothing is to be applied}
+}
+
+
+Kannisto method:
+\itemize{
+  \item{\code{fitted_ages} - vector of ages for which model is fitted on}
+
+}
+}
 \examples{
 AUS_male_rates <- mortality_AUS_data$rate$male
 ages <- mortality_AUS_data$age # 0:110
 old_ages <- 91:130
 
-# first convert mortality rates to death probabilties
+# first convert mortality rates to death probabilities
 AUS_male_qx <- rate2rate(AUS_male_rates, from = "central", to = "prob")
 
 # completing mortality rates for old ages
@@ -62,5 +86,6 @@ CK_q <- complete_old_age(
 AUS_male_qx, ages, old_ages, method = "CK", type = "prob")
 
 kannisto_q <- complete_old_age(
-AUS_male_qx, ages, old_ages, method = "kannisto", type = "prob", fitted_ages = 80:90)
+AUS_male_qx, ages, old_ages, method = "kannisto", type = "prob",
+control = list(fitted_ages = 80:90))
 }
