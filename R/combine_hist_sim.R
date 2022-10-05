@@ -16,6 +16,38 @@
 #' 3D array of combined historical and simulated rates
 #' @export
 #'
+#' @examples
+#' \dontrun{
+#' # fitting lee carter model on ages 55:89
+#' AUS_StMoMo <- StMoMoData(mortality_AUS_data, series = "male")
+#' LC <- lc(link = "logit") # lee carter model
+#' AUS_Male_Ini_Data <- central2initial(AUS_StMoMo)
+#' ages_fit <- 55:89
+#' wxy <- genWeightMat(ages = ages_fit, years = AUS_Male_Ini_Data$years, clip = 3)
+#' LC_fit <- fit(LC, data = AUS_Male_Ini_Data, ages.fit = ages_fit, wxt = wxy)
+#'
+#' # simulating rates for next 100 years
+#' set.seed(1234)
+#' n_sim <- 10
+#' LC_sim <- simulate(LC_fit, nsim = n_sim, h = 100)
+#'
+#' # using kannisto method to complete rates
+#' young_ages <- LC_sim$ages # 55:89
+#' old_ages <- 90:130
+#' ages <- c(young_ages, old_ages)
+#' rates_hist <- mortality_AUS_data$rate$male[as.character(young_ages), ]
+#'
+#' kannisto_sim <- complete_old_age(rates = LC_sim$rates, ages = young_ages,
+#'                                  old_ages = old_ages, fitted_ages = 80:89,
+#'                                  method = "kannisto", type = "central")
+#' kannisto_hist <- complete_old_age(rates = rates_hist, ages = young_ages,
+#'                                   old_ages = old_ages, fitted_ages = 80:89,
+#'                                   method = "kannisto", type = "central")
+#' ################# USAGE BEGINS HERE ################
+#' # combining
+#' kannisto_55_period <- combine_hist_sim(rates_hist = kannisto_hist,
+#'                                        rates_sim = kannisto_sim)
+#' }
 combine_hist_sim <- function(rates_hist, rates_sim) {
 
   # Flagging errors ---------------------------------------------------------
