@@ -4,3 +4,8 @@
 \name{StMoMoExt}
 \alias{StMoMoExt}
 \title{StMoMoExt.}
+\description{
+An extension of the 'StMoMo' R package to produce mortality rates
+at older ages and risk-free survival probabilities. It also includes
+functions to simulate life paths and output summary statistics.
+}

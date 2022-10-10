@@ -1,5 +1,9 @@
 #' StMoMoExt.
 #'
+#' An extension of the 'StMoMo' R package to produce mortality rates
+#' at older ages and risk-free survival probabilities. It also includes
+#' functions to simulate life paths and output summary statistics.
+#'
 #' @name StMoMoExt
 #' @docType package
 #' @importFrom dplyr near
@@ -10,7 +14,6 @@
 #' @importFrom stats approxfun uniroot quantile pnorm
 #' @importFrom utils head tail
 NULL
-
 
 #' Australian mortality data
 #'
